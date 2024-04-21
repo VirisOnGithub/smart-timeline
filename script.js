@@ -6,8 +6,8 @@
 
 let putTextOnTop = false; // Mettre le texte au dessus des parallélogrammes
 let font = 'Merriweather'; // Police du texte, entrez une police de Google Fonts
-let height = 30; // Hauteur des parallélogrammes
-let fontSize = 5; // Taille de la police
+let height = 150; // Hauteur des parallélogrammes
+let fontSize = 0; // Augmenter ou réduire la taille du texte (0 pour la taille par défaut)
 
 
 
@@ -53,44 +53,44 @@ parallel.forEach(function (e) {
 	e.innerHTML = '';
   
 	// Parallèlogramme haut
-  var div = document.createElement('div');
+  	var pt = document.createElement('div');
 
-  div.classList.add('parallel-left');
-	div.style.transform = 'skew(20deg)';
-	addAttr(div, color, width, height);
-	e.appendChild(div);
+  	pt.classList.add('parallel-left');
+	pt.style.transform = 'skew(20deg)';
+	addAttr(pt, color, width, height);
+	e.appendChild(pt);
 
 	// Parallèlogramme bas
-	div = document.createElement('div');
+	var pb = document.createElement('div');
 
-	div.classList.add('parallel-right');
-	div.style.transform = 'skew(-20deg)';
-	addAttr(div, color, width, height);
-	e.appendChild(div);
+	pb.classList.add('parallel-right');
+	pb.style.transform = 'skew(-20deg)';
+	addAttr(pb, color, width, height);
+	e.appendChild(pb);
 
 	// Barre verticale
 	if(count != 0 || putTextOnTop) {
-		div = document.createElement('div');
-		div.classList.add('vertical');
-		div.style.marginLeft = 'calc(-'+height/2+'px * tan(20deg) - 0.5px)';
-		div.style.width = '0.5px';
-		div.style.height = height/5 + 'px';
-		div.style.transform = 'translateY(-100%)';
-		e.appendChild(div);
+		var vb = document.createElement('div');
+		vb.classList.add('vertical');
+		vb.style.marginLeft = 'calc(-'+height/2+'px * tan(20deg) - 0.5px)';
+		vb.style.width = '0.5px';
+		vb.style.height = height/5 + 'px';
+		vb.style.transform = 'translateY(-100%)';
+		e.appendChild(vb);
 	}
 
 	// Texte
-	div = document.createElement('div');
-	div.innerHTML = content.replace(';', '<br>');
-	div.style.marginLeft = 'calc(-'+height/2+'px * tan(20deg) - 0.5px)';
-	div.style.transform = putTextOnTop ? 'translate(-50%, -200%)' : 'translate(0,-100%)';
-	div.style.width = width + 'px';
-	div.classList.add('text');
-	div.style.fontFamily = font;
-	div.style.zIndex = toString(1000 - count);
-	div.style.fontSize = fontSize +'px';
-	e.appendChild(div);
-	if (hasOverflowed(div)) {
+	var txt = document.createElement('div');
+	txt.innerHTML = content.replace(';', '<br>');
+	txt.style.marginLeft = 'calc(-'+height/2+'px * tan(20deg) - 0.5px)';
+	txt.style.transform = putTextOnTop ? 'translate(-50%, -200%)' : 'translate(0,-100%)';
+	txt.style.width = width + 'px';
+	txt.classList.add('text');
+	txt.style.fontFamily = font;
+	txt.style.zIndex = toString(1000 - count);
+	txt.style.fontSize = height/10 + fontSize + 'px';
+	e.appendChild(txt);
+	if (hasOverflowed(txt)) {
 		console.log('L\'élément a débordé');
 	} else {
 		console.log('L\'élément n\'a pas débordé');
