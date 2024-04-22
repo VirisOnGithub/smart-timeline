@@ -66,7 +66,59 @@ body {
     left: 0;
     right: 0;
     display: flex;
-    justify-content: space-around;
+    justify-content: flex-start;
     padding: 20px;
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: transparent;
+    z-index: 0;
+}
+
+.new {
+    padding: 10px;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.parameter {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-evenly;
+    align-items: center;
+
+    & > input {
+        width: 50%;
+        padding: 5px;
+    }
+}
+
+.parall-create {
+    padding: 10px 20px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: rgb(254, 27, 32);
+}
+
+.open-new {
+    visibility: hidden;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    border: 1px solid black;
+    border-radius: 0 5px 0 0;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.close-new {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    cursor: pointer;
+    border: 1px solid black;
 }

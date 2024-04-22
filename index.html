@@ -16,21 +16,32 @@
         </div>
         <div class="parameters">
             <div class="new">
-                <div class="parameter">
-                    <label for="pcolor">Color</label>
-                    <input type="color" id="pcolor" value="#3694e2">
-                </div>
-                <div class="parameter">
-                    <label for="pwidth">Width</label>
-                    <input type="number" id="pwidth" value="200">
-                </div>
-                <div class="parameter">
-                    <label for="pcontent">Content</label>
-                    <input type="text" id="pcontent" value="Lorem Ipsum">
-                </div>
-                <button onclick="addParallel()">Add Parallel</button>
+                <table>
+                    <div class="close-new" onclick="closeNew()">X</div>
+                    <tr>
+                        <th>Color</th>
+                        <th>Width</th>
+                        <th>Content</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input class="input-new" type="color" id="pcolor" value="#3694e2">
+                        </td>
+                        <td>
+                            <input class="input-new" type="number" id="pwidth" value="200">
+                        </td>
+                        <td>
+                            <input class="input-new" type="text" id="pcontent" value="Lorem Ipsum">
+                        </td>
+                    </tr>
+                </table>
+                <button class="parall-create" onclick="addParallel()">Add Parallel</button>
             </div>
         </div>
+
+
+
+        <div class="open-new" onclick="openNew()">Show Creator</div>
         <script src="script.js"></script>
         <script>
             updateParallels();
