@@ -36,3 +36,69 @@ function openNew () {
     let openBtn = document.querySelector('.open-new');
     openBtn.style.visibility = 'hidden';
 }
+
+var selectedIndex = 0;
+
+function updateEventList(){
+    let parallels = document.querySelectorAll('.parallel');
+    parallels.forEach((parallel, index) => {
+        parallel.addEventListener('click', function(){
+            selectedIndex = index;
+            markSelected();
+            showEdit();
+            let color = parallel.getAttribute('pcolor');
+            let width = parallel.getAttribute('pwidth');
+            let content = parallel.querySelector('.text').innerHTML.replace('<br>', ';');
+
+            let colorInput = document.getElementById('mcolor');
+            let widthInput = document.getElementById('mwidth');
+            let contentInput = document.getElementById('mcontent');
+
+            colorInput.value = color;
+            widthInput.value = width;
+            contentInput.value = content;
+        });
+    });
+}
+
+function markSelected(){
+    let parallels = document.querySelectorAll('.parallel');
+    parallels.forEach(parallel => {
+        parallel.querySelector('.parallel-left').style.border = 'none';
+        parallel.querySelector('.parallel-right').style.border = 'none';
+    });
+
+    if(selectedIndex != -1){
+        parallels[selectedIndex].querySelector('.parallel-left').style.border = '1px solid black';
+        parallels[selectedIndex].querySelector('.parallel-left').style.borderWidth = '2px 2px 0 2px';
+        parallels[selectedIndex].querySelector('.parallel-right').style.border = '1px solid black';
+        parallels[selectedIndex].querySelector('.parallel-right').style.borderWidth = '0 2px 2px 2px';
+    }
+}
+
+function showEdit(){
+    let edit = document.querySelector('.edit');
+    edit.style.visibility = 'visible';
+}
+
+function hideEdit(){
+    let edit = document.querySelector('.edit');
+    edit.style.visibility = 'hidden';
+}
+
+function editParallel(){
+    let color = document.getElementById('mcolor').value;
+    let width = document.getElementById('mwidth').value;
+    let content = document.getElementById('mcontent').value;
+
+    let parallels = document.querySelectorAll('.parallel');
+    let parallel = parallels[selectedIndex];
+    parallel.setAttribute('pcolor', color);
+    parallel.setAttribute('pwidth', width);
+    parallel.querySelector('.text').innerHTML = content.replace(';', '<br>');
+
+    selectedIndex = -1;
+    markSelected();
+    updateParallels();
+    hideEdit();
+}

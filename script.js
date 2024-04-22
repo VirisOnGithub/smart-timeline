@@ -42,7 +42,6 @@ function updateParallels(){
 	var count = 0;
 	parallel.forEach(function (e) {
 		if(e.childElementCount == 0){
-			console.log(e.firstChild);
 			// Get all the attributes of the element
 			let color = e.getAttribute('pcolor');
 			let width = e.getAttribute('pwidth');

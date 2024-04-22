@@ -37,6 +37,27 @@
                 </table>
                 <button class="parall-create" onclick="addParallel()">Add Parallel</button>
             </div>
+            <div class="edit">
+                <table>
+                    <tr>
+                        <th>Color</th>
+                        <th>Width</th>
+                        <th>Content</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input class="input-modify" type="color" id="mcolor" value="">
+                        </td>
+                        <td>
+                            <input class="input-modify" type="number" id="mwidth" value="">
+                        </td>
+                        <td>
+                            <input class="input-modify" type="text" id="mcontent" value="">
+                        </td>
+                    </tr>
+                </table>
+                <button class="parall-create" onclick="editParallel()">Edit Parallel</button>
+            </div>
         </div>
 
 
@@ -47,5 +68,8 @@
             updateParallels();
         </script>
         <script src="webscript.js"></script>
+        <script>
+            updateEventList();
+        </script>
     </body>
 </html>

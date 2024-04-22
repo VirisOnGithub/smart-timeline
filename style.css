@@ -66,19 +66,23 @@ body {
     left: 0;
     right: 0;
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     padding: 20px;
     background-color: transparent;
     z-index: 0;
 }
 
-.new {
+.new, .edit {
     padding: 10px;
     border: 1px solid black;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.edit {
+    visibility: hidden;
 }
 
 .parameter {
@@ -101,7 +105,7 @@ body {
     border-radius: 5px;
     font-size: 16px;
     cursor: pointer;
-    background-color: rgb(254, 27, 32);
+    background-color: #3694e2;
 }
 
 .open-new {
