@@ -1,7 +1,25 @@
+@font-face {
+    font-family: 'Timeline';
+    src: url(Timeline.ttf);
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+h1 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 10vh;
+    backdrop-filter: blur(5px);
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.5);
+    font-family: 'Timeline';
 }
 
 body {
@@ -14,6 +32,9 @@ body {
 .container {
     display: flex;
     flex-direction: row;
+    background-color: white;
+    padding: 50px;
+    transform: translateY(10vh);
 }
 
 .parallel {

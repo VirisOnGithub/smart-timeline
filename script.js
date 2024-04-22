@@ -9,7 +9,7 @@ let font = 'Merriweather'; // Police du texte, entrez une police de Google Fonts
 let height = 100; // Hauteur des parallélogrammes
 let fontSize = 0; // Augmenter ou réduire la taille du texte (0 pour la taille par défaut)
 let barThickness = 1; // Epaisseur de la barre verticale, en px
-let skew = 20; // Angle de skew des parallélogrammes
+let skew = 10; // Angle de skew des parallélogrammes
 
 
 
