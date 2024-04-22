@@ -9,6 +9,7 @@ let font = 'Merriweather'; // Police du texte, entrez une police de Google Fonts
 let height = 100; // Hauteur des parallélogrammes
 let fontSize = 0; // Augmenter ou réduire la taille du texte (0 pour la taille par défaut)
 let barThickness = 1; // Epaisseur de la barre verticale, en px
+let skew = 20; // Angle de skew des parallélogrammes
 
 
 
@@ -56,7 +57,7 @@ parallel.forEach(function (e) {
   	var pt = document.createElement('div');
 
   	pt.classList.add('parallel-left');
-	pt.style.transform = 'skew(20deg)';
+	pt.style.transform = 'skew('+skew+'deg)';
 	addAttr(pt.style, color, width, height);
 	e.appendChild(pt);
 
@@ -64,7 +65,7 @@ parallel.forEach(function (e) {
 	var pb = document.createElement('div');
 
 	pb.classList.add('parallel-right');
-	pb.style.transform = 'skew(-20deg)';
+	pb.style.transform = 'skew(-'+skew+'deg)';
 	addAttr(pb.style, color, width, height);
 	e.appendChild(pb);
 
@@ -72,7 +73,7 @@ parallel.forEach(function (e) {
 	if(count != 0 || putTextOnTop) {
 		var vb = document.createElement('div');
 		vb.classList.add('vertical');
-		vb.style.marginLeft = 'calc(-'+height/2+'px * tan(20deg) - 0.5px)';
+		vb.style.marginLeft = 'calc(-'+height/2+'px * tan('+ skew +'deg) - 0.5px)';
 		vb.style.width = barThickness+'px';
 		vb.style.height = height/5 + 'px';
 		vb.style.transform = 'translateY(-100%)'
@@ -82,7 +83,7 @@ parallel.forEach(function (e) {
 	// Texte
 	var txt = document.createElement('div');
 	txt.innerHTML = content.replace(';', '<br>');
-	txt.style.marginLeft = 'calc(-'+height/2+'px * tan(20deg) - 0.5px)';
+	txt.style.marginLeft = 'calc(-'+height/2+'px * tan('+skew+'deg) - 0.5px)';
 	txt.style.transform = putTextOnTop ? 'translate(-50%, -200%)' : 'translate(0,-100%)';
 	txt.style.width = width + 'px';
 	txt.classList.add('text');
