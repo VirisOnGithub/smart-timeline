@@ -19,7 +19,6 @@ body {
 .parallel {
     display: flex;
     flex-direction: column;
-    margin: 0 0.25px;
 }
 
 /* positionnement des lignes verticales */

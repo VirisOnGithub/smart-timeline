@@ -6,13 +6,14 @@
 
 let putTextOnTop = false; // Mettre le texte au dessus des parallélogrammes
 let font = 'Merriweather'; // Police du texte, entrez une police de Google Fonts
-let height = 150; // Hauteur des parallélogrammes
+let height = 100; // Hauteur des parallélogrammes
 let fontSize = 0; // Augmenter ou réduire la taille du texte (0 pour la taille par défaut)
+let barThickness = 1; // Epaisseur de la barre verticale, en px
 
 
 
 ////////////////////////////////////////////
-/*          */ /*SCRIPT*/ /*             */
+/*           */ /*SCRIPT*/ /*             */
 ////////////////////////////////////////////
 
 
@@ -27,20 +28,19 @@ document.head.appendChild(link);
 
 var container = document.querySelector('.container');
 
-function addAttr (div, color, width, height) {
-    div.style.backgroundColor = color;
-    div.style.width = width + 'px';
-    div.style.height = height + 'px';
-		div.style.margin = '0';
-		div.style.padding = '0';
-		div.style.lineHeight = '0';
-		div.style.display = 'inline-block';
+function addAttr (divstyle, color, width, height) {
+    divstyle.backgroundColor = color;
+    divstyle.width = width + 'px';
+    divstyle.height = height + 'px';
+	divstyle.margin = '0 '+barThickness+'px';
+	divstyle.padding = '0';
+	divstyle.lineHeight = '0';
+	divstyle.display = 'inline-block';
 }
 
 function hasOverflowed(element) {
     return element.scrollHeight > element.clientHeight || element.scrollWidth > element.clientWidth;
 }
-
 
 // Création des parallélogrammes
 var parallel = container.querySelectorAll('.parallel');
@@ -57,7 +57,7 @@ parallel.forEach(function (e) {
 
   	pt.classList.add('parallel-left');
 	pt.style.transform = 'skew(20deg)';
-	addAttr(pt, color, width, height);
+	addAttr(pt.style, color, width, height);
 	e.appendChild(pt);
 
 	// Parallèlogramme bas
@@ -65,7 +65,7 @@ parallel.forEach(function (e) {
 
 	pb.classList.add('parallel-right');
 	pb.style.transform = 'skew(-20deg)';
-	addAttr(pb, color, width, height);
+	addAttr(pb.style, color, width, height);
 	e.appendChild(pb);
 
 	// Barre verticale
@@ -73,9 +73,9 @@ parallel.forEach(function (e) {
 		var vb = document.createElement('div');
 		vb.classList.add('vertical');
 		vb.style.marginLeft = 'calc(-'+height/2+'px * tan(20deg) - 0.5px)';
-		vb.style.width = '0.5px';
+		vb.style.width = barThickness+'px';
 		vb.style.height = height/5 + 'px';
-		vb.style.transform = 'translateY(-100%)';
+		vb.style.transform = 'translateY(-100%)'
 		e.appendChild(vb);
 	}
 
@@ -91,10 +91,23 @@ parallel.forEach(function (e) {
 	txt.style.fontSize = height/10 + fontSize + 'px';
 	e.appendChild(txt);
 	if (hasOverflowed(txt)) {
-		console.log('L\'élément a débordé');
+		// console.log('L\'élément a débordé');
+		// On supprime le texte pour le remettre en bas
+		e.removeChild(txt);
+		txt.style.transform = putTextOnTop ? 'translate(-50%, '+ (height*2+height/5) +'px)' : 'translate('+-width/2+'px,'+ height*2 +'px)';
+		txt.style.width = width*2 + 'px';
+		e.appendChild(txt);
+
+		if(count != 0 || putTextOnTop) {
+			e.removeChild(vb);
+			vb.style.transform = 'translate(0,'+ height*2 +'px';
+			e.appendChild(vb);
+		}
+
 	} else {
-		console.log('L\'élément n\'a pas débordé');
+		// console.log('L\'élément n\'a pas débordé');
 	}
+	
 
 	count++;
 });
