@@ -14,6 +14,27 @@
             <div pcolor="#3694e2" pwidth="200" class="parallel">Old Trafford ; 2023 - 2024</div>
             <div pcolor="#3694e2" pwidth="200" class="parallel">Manchester United ; 2024 - </div>
         </div>
+        <div class="parameters">
+            <div class="new">
+                <div class="parameter">
+                    <label for="pcolor">Color</label>
+                    <input type="color" id="pcolor" value="#3694e2">
+                </div>
+                <div class="parameter">
+                    <label for="pwidth">Width</label>
+                    <input type="number" id="pwidth" value="200">
+                </div>
+                <div class="parameter">
+                    <label for="pcontent">Content</label>
+                    <input type="text" id="pcontent" value="Lorem Ipsum">
+                </div>
+                <button onclick="addParallel()">Add Parallel</button>
+            </div>
+        </div>
         <script src="script.js"></script>
+        <script>
+            updateParallels();
+        </script>
+        <script src="webscript.js"></script>
     </body>
 </html>

@@ -57,3 +57,16 @@ body {
     overflow: hidden;
     text-align: center;
 }
+
+
+/* PARAMETERS */
+.parameters {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.5);
+}
