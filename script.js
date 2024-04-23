@@ -5,7 +5,7 @@
 let putTextOnTop = false; // Place the text above the parallelograms
 let font = 'Merriweather'; // Text font, enter a Google Fonts font
 let height = 100; // Height of the parallelograms
-let fontSize = 0; // Increase or decrease the text size (0 for default size)
+let fontSize = 10; // Increase or decrease the text size (0 for default size)
 let barThickness = 1; // Thickness of the vertical bar, in pixels
 let skew = 10; // Skew angle of the parallelograms
 
@@ -45,6 +45,7 @@ function updateParallels(){
 			// Get all the attributes of the element
 			let color = e.getAttribute('pcolor');
 			let width = e.getAttribute('pwidth');
+			console.log('Color: ' + color + ' Width: ' + width);
 			let content = e.innerHTML;
 			e.innerHTML = '';
 		
@@ -53,6 +54,7 @@ function updateParallels(){
 			pt.classList.add('parallel-left');
 			pt.style.transform = 'skew('+skew+'deg)';
 			addAttr(pt.style, color, width, height);
+			console.log(pt.style.width + ' ' + pt.style.height + ' ' + pt.style.backgroundColor)
 			e.appendChild(pt);
 		
 			// Bottom parallelogram
@@ -84,25 +86,29 @@ function updateParallels(){
 			txt.style.zIndex = toString(1000 - count);
 			txt.style.fontSize = height/10 + fontSize + 'px';
 			e.appendChild(txt);
-			if (hasOverflowed(txt)) {
-				// console.log('The element has overflowed');
-				// Remove the text and place it at the bottom
-				e.removeChild(txt);
-				txt.style.transform = putTextOnTop ? 'translate(-50%, '+ (height*2+height/5) +'px)' : 'translate('+-width/2+'px,'+ height*2 +'px)';
-				txt.style.width = width*2 + 'px';
-				e.appendChild(txt);
-		
-				if(count != 0 || putTextOnTop) {
-					e.removeChild(vb);
-					vb.style.transform = 'translate(0,'+ height*2 +'px';
-					e.appendChild(vb);
-				}
-		
-			} else {
-				// console.log('The element has not overflowed');
-			}
+			adjustWidth(e,txt,vb,width, count);
 		}
 		
 		count++;
 	});
+}
+
+function adjustWidth(e,txt,vb,width, count){
+	if (hasOverflowed(txt)) {
+		// console.log('The element has overflowed');
+		// Remove the text and place it at the bottom
+		e.removeChild(txt);
+		txt.style.transform = putTextOnTop ? 'translate(-50%, '+ (height*2+height/5) +'px)' : 'translate('+-width/2+'px,'+ height*2 +'px)';
+		txt.style.width = width*2 + 'px';
+		e.appendChild(txt);
+
+		if(count != 0 || putTextOnTop) {
+			e.removeChild(vb);
+			vb.style.transform = 'translate(0,'+ height*2 +'px';
+			e.appendChild(vb);
+		}
+
+	} else {
+		// console.log('The element has not overflowed');
+	}
 }

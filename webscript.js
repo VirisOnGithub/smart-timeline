@@ -93,12 +93,18 @@ function editParallel(){
 
     let parallels = document.querySelectorAll('.parallel');
     let parallel = parallels[selectedIndex];
+    parallel.querySelector('.text').innerHTML = content.replace(';', '<br>');
+    parallel.querySelector('.text').style.width = width + 'px';
+    parallel.querySelector('.parallel-left').style.backgroundColor = color;
+    parallel.querySelector('.parallel-right').style.backgroundColor = color;
     parallel.setAttribute('pcolor', color);
     parallel.setAttribute('pwidth', width);
-    parallel.querySelector('.text').innerHTML = content.replace(';', '<br>');
+    parallel.querySelector('.parallel-left').style.width = width + 'px';
+    parallel.querySelector('.parallel-right').style.width = width + 'px';
+
+    adjustWidth(parallel, parallel.querySelector('.text'), parallel.querySelector('.vertical'), width, selectedIndex);
 
     selectedIndex = -1;
     markSelected();
-    updateParallels();
     hideEdit();
 }
