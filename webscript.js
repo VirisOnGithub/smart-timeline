@@ -11,6 +11,7 @@ function addParallel(){
 
     container.innerHTML += '<div class="parallel" pcolor="'+pcolor+'" pwidth="'+pwidth+'">'+content+'</div>';
     updateParallels();
+    updateEventList();
 }
 
 function updateColor(){

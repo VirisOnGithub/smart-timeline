@@ -5,7 +5,7 @@
 let putTextOnTop = false; // Place the text above the parallelograms
 let font = 'Merriweather'; // Text font, enter a Google Fonts font
 let height = 100; // Height of the parallelograms
-let fontSize = 10; // Increase or decrease the text size (0 for default size)
+let fontSize = 5; // Increase or decrease the text size (0 for default size)
 let barThickness = 1; // Thickness of the vertical bar, in pixels
 let skew = 10; // Skew angle of the parallelograms
 
