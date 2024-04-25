@@ -37,7 +37,6 @@ function hasOverflowed(element) {
 
 // Creating the parallelograms
 function updateParallels(){
-	console.log('Updating parallels');
 	var parallel = container.querySelectorAll('.parallel');
 	var count = 0;
 	parallel.forEach(function (e) {
@@ -45,7 +44,6 @@ function updateParallels(){
 			// Get all the attributes of the element
 			let color = e.getAttribute('pcolor');
 			let width = e.getAttribute('pwidth');
-			console.log('Color: ' + color + ' Width: ' + width);
 			let content = e.innerHTML;
 			e.innerHTML = '';
 		
@@ -54,7 +52,6 @@ function updateParallels(){
 			pt.classList.add('parallel-left');
 			pt.style.transform = 'skew('+skew+'deg)';
 			addAttr(pt.style, color, width, height);
-			console.log(pt.style.width + ' ' + pt.style.height + ' ' + pt.style.backgroundColor)
 			e.appendChild(pt);
 		
 			// Bottom parallelogram
@@ -91,6 +88,14 @@ function updateParallels(){
 		
 		count++;
 	});
+	let title = document.querySelector('.title');
+	if(title){
+		title.style.fontFamily = font;
+		title.style.fontSize = height/5 + fontSize + 'px';
+		title.style.padding = fontSize + 'px';
+		title.style.backgroundColor = 'white';
+		title.style.transform = 'translateY(100%)';
+	}
 }
 
 function adjustWidth(e,txt,vb,width, count){

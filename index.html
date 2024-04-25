@@ -56,12 +56,33 @@
                         </td>
                     </tr>
                 </table>
-                <button class="parall-create" onclick="editParallel()">Edit Parallel</button>
+                <div style="display: flex; justify-content: space-evenly; width: 100%;">
+                    <button class="parall-create" onclick="editParallel()">Edit Parallel</button>
+                    <button class="parall-create" onclick="deleteParallel()">Remove Parallel</button>
+                </div>
+            </div>
+            <div class="general">
+                <div class="close-general" onclick="closeGeneral()">X</div><br>
+                <h3>General Settings</h3>
+                <div class="input-general">
+                    <label for="title">Title</label>
+                    <input type="text" id="title" value="Smart Timeline">
+                </div>
+                <div class="input-general">
+                    <label for="text-on-top">Mettre le texte au dessus</label>
+                    <input type="checkbox" id="text-on-top">
+                </div>
+                <div class="input-general">
+                    <label for="font">Police</label>
+                    <input type="text" id="font" value="Merriweather">
+                </div>
+                <div class="input-general"></div>
+                <div class="input-general"></div>
             </div>
         </div>
 
 
-
+        <div class="open-general" onclick="openGeneral()">Show General Settings</div>
         <div class="open-new" onclick="openNew()">Show Creator</div>
         <script src="script.js"></script>
         <script>
@@ -71,6 +92,7 @@
         <script>
             updateEventList();
             closeNew();
+            closeGeneral();
         </script>
     </body>
 </html>
