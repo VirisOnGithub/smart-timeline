@@ -87,8 +87,14 @@
         <div class="open-new" onclick="openNew()">Show Creator</div>
 
         <div class="import-export">
-            <button class="export-data" onclick="exportData()">Export Data</button>
-            <button class="import-data" onclick="importData()">Import Data</button>
+            <div class="copy-paste">
+                <button class="export-data" onclick="exportData()">Export Data</button>
+                <button class="import-data" onclick="importData()">Import Data</button>
+            </div>
+            <div class="ie-file">
+                <button class="export-data-file" onclick="exportDataInFile()">Export in a File</button>
+                <button class="import-data-file" onclick="importDataFromFile()">Import from a File</button>
+            </div>
         </div>
         <script src="script.js"></script>
         <script>

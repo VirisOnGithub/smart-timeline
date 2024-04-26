@@ -1,5 +1,5 @@
-function exportData() {
-  let container = document.querySelector('.container');
+function makeData(){
+	let container = document.querySelector('.container');
   let parallels = container.querySelectorAll('.parallel');
   let message = ""; // message to be exported
 	parallels.forEach((parallel) => {
@@ -8,14 +8,17 @@ function exportData() {
 		let width = parallel.getAttribute('pwidth');
 
 		message += title + "," + color + "," + width + ":";
+	});
+	return message;
+}
 
-		// Copy message to clipboard
-		navigator.clipboard.writeText(message).then(() => {
-			let exportButton = document.querySelector('.export-data');
-			exportButton.innerHTML = 'Copied!';
-		}, (err) => {
-			console.error('Error copying text to clipboard', err);
-		});
+function exportData() {
+	// Copy message to clipboard
+	navigator.clipboard.writeText(makeData()).then(() => {
+		let exportButton = document.querySelector('.export-data');
+		exportButton.innerHTML = 'Copied!';
+	}, (err) => {
+		console.error('Error copying text to clipboard', err);
 	});
 }
 
@@ -23,21 +26,57 @@ function importData() {
 	let container = document.querySelector('.container');
 	let data = prompt('Paste your data here:');
 	if(data){
-		container.innerHTML = '';
-		let parallels = data.split(':');
-		parallels.forEach((parallel, index) => {
-			let [title, color, width] = parallel.split(',');
-			let parallelElement = document.createElement('div');
-			parallelElement.classList.add('parallel');
-			parallelElement.setAttribute('pcolor', color);
-			parallelElement.setAttribute('pwidth', width);
-			parallelElement.innerHTML = title;
-
-			container.appendChild(parallelElement);
-		});
-		updateParallels();
-		updateEventList();
+		loadData(data);
 	}
 }
 
-// <div pcolor="#3694e2" pwidth="200" class="parallel">Brownstone High School ; 2019 - 2023</div>
+function exportDataInFile() {
+	let data = makeData();
+	let date = new Date();
+	let filename = 'parallels-' + date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() + '-' + date.getHours() + date.getMinutes()+ date.getSeconds() + '.smtl';
+	let file = new Blob([data], {type: 'text/plain'});
+	let a = document.createElement('a');
+	let url = URL.createObjectURL(file);
+	a.href = url
+	a.download = filename;
+	document.body.appendChild(a);
+	a.click();
+	setTimeout(() => {
+		document.body.removeChild(a);
+		window.URL.revokeObjectURL(url);
+	}, 0);
+}
+
+function importDataFromFile() {
+	let input = document.createElement('input');
+	input.type = 'file';
+	input.accept = '.smtl';
+	input.onchange = (e) => {
+		let file = e.target.files[0];
+		let reader = new FileReader();
+		reader.onload = (e) => {
+			if(confirm('This will replace the current data. Are you sure?')){
+				loadData(e.target.result);
+			}
+		};
+		reader.readAsText(file);
+	};
+	input.click();
+}
+
+function loadData(data){
+	container.innerHTML = '';
+	let parallels = data.split(':');
+	parallels.forEach((parallel) => {
+		let [title, color, width] = parallel.split(',');
+		let parallelElement = document.createElement('div');
+		parallelElement.classList.add('parallel');
+		parallelElement.setAttribute('pcolor', color);
+		parallelElement.setAttribute('pwidth', width);
+		parallelElement.innerHTML = title;
+
+		container.appendChild(parallelElement);
+	});
+	updateParallels();
+	updateEventList();
+}
