@@ -49,7 +49,7 @@ function updateEventList(){
             showEdit();
             let color = parallel.getAttribute('pcolor');
             let width = parallel.getAttribute('pwidth');
-            let content = parallel.querySelector('.text').innerHTML.replace('<br>', ';');
+            let content = parallel.querySelector('.text').innerHTML.replace(/;/g, '<br>');
 
             let colorInput = document.getElementById('mcolor');
             let widthInput = document.getElementById('mwidth');
@@ -94,7 +94,7 @@ function editParallel(){
 
     let parallels = document.querySelectorAll('.parallel');
     let parallel = parallels[selectedIndex];
-    parallel.querySelector('.text').innerHTML = content.replace(';', '<br>');
+    parallel.querySelector('.text').innerHTML = content.replace(/;/g, '<br>');
     parallel.querySelector('.text').style.width = width + 'px';
     parallel.querySelector('.parallel-left').style.backgroundColor = color;
     parallel.querySelector('.parallel-right').style.backgroundColor = color;

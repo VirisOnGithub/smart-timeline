@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>&nbsp;</title>
         <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="import-export.css">
         <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/8101/8101319.png">
     </head>
     <body>
@@ -84,6 +85,11 @@
 
         <div class="open-general" onclick="openGeneral()">Show General Settings</div>
         <div class="open-new" onclick="openNew()">Show Creator</div>
+
+        <div class="import-export">
+            <button class="export-data" onclick="exportData()">Export Data</button>
+            <button class="import-data" onclick="importData()">Import Data</button>
+        </div>
         <script src="script.js"></script>
         <script>
             updateParallels();
@@ -94,5 +100,6 @@
             closeNew();
             closeGeneral();
         </script>
+        <script src="import-export.js"></script>
     </body>
 </html>

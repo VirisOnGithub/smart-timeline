@@ -9,6 +9,8 @@ let fontSize = 5; // Increase or decrease the text size (0 for default size)
 let barThickness = 1; // Thickness of the vertical bar, in pixels
 let skew = 10; // Skew angle of the parallelograms
 
+let maxNbLines = 1; // Maximum number of lines in the text
+
 ////////////////////////////////////////////
 /*           */ /*SCRIPT*/ /*             */
 ////////////////////////////////////////////
@@ -32,7 +34,7 @@ function addAttr (divstyle, color, width, height) {
 }
 
 function hasOverflowed(element) {
-	return element.scrollHeight > element.clientHeight || element.scrollWidth > element.clientWidth;
+	return element.scrollWidth > element.clientWidth;
 }
 
 // Creating the parallelograms
@@ -46,6 +48,7 @@ function updateParallels(){
 			let width = e.getAttribute('pwidth');
 			let content = e.innerHTML;
 			e.innerHTML = '';
+			maxNbLines = Math.max(content.split(';').length, maxNbLines);
 		
 			// Top parallelogram
 			var pt = document.createElement('div');
@@ -74,7 +77,7 @@ function updateParallels(){
 		
 			// Text
 			var txt = document.createElement('div');
-			txt.innerHTML = content.replace(';', '<br>');
+			txt.innerHTML = content.replace(/;/g, '<br>');
 			txt.style.marginLeft = 'calc(-'+height/2+'px * tan('+skew+'deg) - 0.5px)';
 			txt.style.transform = putTextOnTop ? 'translate(-50%, -200%)' : 'translate(0,-100%)';
 			txt.style.width = width + 'px';
@@ -88,6 +91,9 @@ function updateParallels(){
 		
 		count++;
 	});
+
+	container.style.padding = maxNbLines*2 + 'em';
+
 	let title = document.querySelector('.title');
 	if(title){
 		title.style.fontFamily = font;
@@ -103,9 +109,17 @@ function adjustWidth(e,txt,vb,width, count){
 		// console.log('The element has overflowed');
 		// Remove the text and place it at the bottom
 		e.removeChild(txt);
-		txt.style.transform = putTextOnTop ? 'translate(-50%, '+ (height*2+height/5) +'px)' : 'translate('+-width/2+'px,'+ height*2 +'px)';
-		txt.style.width = width*2 + 'px';
+		txt.style.transform = putTextOnTop ? 'translate(-50%, '+ (height*2+height/5) +'px)' : 'translate('+-width+'px,'+ height*2 +'px)';
+		width = width*3;
+		txt.style.width = width + 'px';
 		e.appendChild(txt);
+
+		// while(hasOverflowed(txt)){
+		// 	e.removeChild(txt);
+		// 	width = width + 1;
+		// 	txt.style.width = width + 'px';
+		// 	e.appendChild(txt);
+		// }
 
 		if(count != 0 || putTextOnTop) {
 			e.removeChild(vb);
