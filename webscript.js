@@ -158,7 +158,7 @@ title.addEventListener('input', changeTitle);
 function textOnTop(){
     let tot = document.getElementById('text-on-top').checked;
     let parallels = document.querySelectorAll('.parallel');
-    parallels.forEach((parallel, index) => {
+    parallels.forEach((parallel) => {
         let txt = parallel.querySelector('.text');
         txt.style.transform = tot ? 'translate(-50%, -200%)' : 'translate(0,-100%)';
     });
@@ -169,8 +169,11 @@ function textOnTop(){
         vb.style.marginLeft = 'calc(-'+height/2+'px * tan('+ skew +'deg) - 0.5px)';
         vb.style.width = barThickness+'px';
         vb.style.height = height/5 + 'px';
-        vb.style.transform = 'translateY(-100%)'
+        vb.style.transform = 'translateY(-100%)';
         par.appendChild(vb);
+
+        let container = document.querySelector('.container');
+        container.style.padding = 'calc(' + maxNbLines*2 + 'em + ' + height/5 + 'px)';
     }
 }
 
