@@ -173,9 +173,20 @@ function textOnTop(){
         par.appendChild(vb);
 
         let container = document.querySelector('.container');
-        container.style.padding = 'calc(' + maxNbLines*2 + 'em + ' + height/5 + 'px)';
+        container.style.padding = 'max(calc(' + maxNbLines*2 + 'em + ' + height/5 + 'px), '+ getTextWidth(par.querySelector('.text'), par.querySelector('.text').innerHTML.split('<br>')[0]) + 'px)';
+    } else {
+        let container = document.querySelector('.container');
+        container.style.padding = maxNbLines*2 + 'em';
     }
 }
 
 let tot = document.getElementById('text-on-top');
 tot.addEventListener('change', textOnTop);
+
+function getTextWidth(e, txt){
+    let canvas = document.createElement('canvas');
+    let ctx = canvas.getContext('2d');
+    ctx.font = e.style.fontSize + ' ' + e.style.fontFamily;
+    console.log(ctx.font);
+    return ctx.measureText(txt).width;
+}

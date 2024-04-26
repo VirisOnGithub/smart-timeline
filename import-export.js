@@ -23,7 +23,6 @@ function exportData() {
 }
 
 function importData() {
-	let container = document.querySelector('.container');
 	let data = prompt('Paste your data here:');
 	if(data){
 		loadData(data);
@@ -65,6 +64,7 @@ function importDataFromFile() {
 }
 
 function loadData(data){
+	let container = document.querySelector('.container');
 	container.innerHTML = '';
 	let parallels = data.split(':');
 	parallels.forEach((parallel) => {
@@ -80,3 +80,29 @@ function loadData(data){
 	updateParallels();
 	updateEventList();
 }
+
+const capture = async () => {
+    const video = document.createElement("video");
+
+    try {
+        const captureStream = await navigator.mediaDevices.getDisplayMedia();
+        video.srcObject = captureStream;
+
+        // Attendre que la vidéo soit prête à être jouée
+        await new Promise((resolve) => video.onloadedmetadata = resolve);
+
+        // Créer un canvas de la taille de la vidéo
+        const canvas = document.createElement("canvas");
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        const context = canvas.getContext("2d");
+
+        // Dessiner sur le canvas
+        context.drawImage(video, 0, 120, video.videoWidth, video.videoHeight);
+        const frame = canvas.toDataURL("image/png");
+        captureStream.getTracks().forEach(track => track.stop());
+        window.location.href = frame;
+    } catch (err) {
+        console.error("Error: " + err);
+    }
+};
