@@ -41,6 +41,7 @@ body {
 .parallel {
     display: flex;
     flex-direction: column;
+    position: relative;
 }
 
 /* positionnement des lignes verticales */

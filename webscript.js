@@ -118,6 +118,38 @@ function deleteParallel(){
     hideEdit();
 }
 
+function insideParallel(){
+    let parallels = document.querySelectorAll('.parallel');
+    let previousOffset = 0;
+    parallels.forEach((parallel, index) => {
+        if(index < selectedIndex){
+            previousOffset += parseInt(parallel.getAttribute('pwidth'));
+        }
+    });
+    console.log(previousOffset);
+    let parallel = parallels[selectedIndex];
+    let color = document.getElementById('mcolor').value;
+    let width = document.getElementById('mwidth').value;
+    let content = document.getElementById('mcontent').value;
+    let insideP = document.createElement('div');
+    let offset = prompt('Enter the offset in pixels:');
+    let txtRectification = -0.25*height * Math.tan(skew * Math.PI / 180);
+    insideP.style.left = parseInt(offset) + 'px';
+    insideP.classList.add('inside-parallel');
+    insideP.innerHTML = `
+        <div class="inside-parallel-left" style="height: ${height}px; width: ${width}px; background-color: ${color}; transform: skew(${skew}deg);"></div>
+        <div class="inside-parallel-right" style="height: ${height}px; width: ${width}px; background-color: ${color}; transform: skew(${-skew}deg);"></div>
+        <div class="inside-text" style="transform: translate(calc(-50% +${txtRectification}px), 100%); font-size: ${fontSize}">${content}</div>
+    `;
+    
+    parallel.appendChild(insideP);
+
+    selectedIndex = -1;
+    updateParallels();
+    updateEventList();
+    hideEdit();
+}
+
 function closeGeneral(){
     let general = document.querySelector('.general');
     general.style.visibility = 'hidden';
@@ -133,7 +165,6 @@ function openGeneral(){
 }
 
 function changeTitle(){
-    console.log('Changing title');
     let title = document.getElementById('title').value;
     let titleElement = document.querySelector('.title');
     if(titleElement && title != ''){

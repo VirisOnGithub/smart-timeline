@@ -1,0 +1,17 @@
+.inside-parallel {
+    position: absolute;
+}
+
+.inside-parallel-left {
+    top: 0;
+}
+
+.inside-parallel-right {
+    bottom: 0;
+}
+
+.inside-text {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+}
